@@ -6,7 +6,9 @@
 [gem]: https://rubygems.org/gems/i18n_accessors
 [travis]: https://travis-ci.org/shioyama/i18n_accessors
 
-Define locale accessors for your translated attributes.
+Define locale accessors for your translated attributes. Extracted from
+[Mobility](https://github.com/shioyama/mobility); works with
+[Globalize](https://github.com/globalize/globalize) and other translation gems.
 
 ## Installation
 
@@ -87,7 +89,23 @@ class Post
 end
 ```
 
-No options are accepted to the constructor for this class.
+You can include both a `I18nAccessors::Methods` module and a
+`I18nAccessors::Missing` module in the same class without conflict (the
+accessor methods will take precedence).
+
+### Configuration
+
+If you are using I18nAccessors with Globalize, you can change the default i18n
+class to `Globalize`:
+
+```ruby
+I18nAccessors.configure do |config|
+  config.i18n_class = Globalize
+end
+```
+
+With this configuration, `Globalize.locale` will be set from the locale
+accessor methods rather than `I18n.locale`.
 
 ## Development
 
