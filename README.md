@@ -1,6 +1,6 @@
 # I18nAccessors
 
-(TODO)
+Define locale accessors for your translated attributes.
 
 ## Installation
 
@@ -20,7 +20,68 @@ Or install it yourself as:
 
 ## Usage
 
-(TODO)
+### Accessor Methods
+
+To define a set of accessors for a translated attribute of the form
+`<attribute>_<locale>`, include an instance of the `I18nAccessors::Methods`
+class in your model with translated attribute names as arguments:
+
+```ruby
+class Post
+
+  def title
+    # ...
+  end
+
+  def title?
+    # ...
+  end
+
+  def title=(title)
+    # ...
+  end
+
+  include I18nAccessors::Methods.new(:title)
+end
+```
+By default, `I18n.available_locales` will be used to determine which locales to
+define accessors for. So if `I18n.available_locales` is `[:en, :fr]`, then this
+will define methods: `title_en`, `title_en?`, `title_en=`, `title_fr`,
+`title_fr?` and `title_fr=`. Each of these methods is an alias to `title` (or
+`title?`, or `title=`) with `I18n.locale` changed to the locale in the suffix.
+
+If you want to specify explicitly which locales to define accessors for, pass
+the locales as an option with the `locales` key to `new` when creating the
+module:
+
+```ruby
+def Post
+
+  # ...
+
+  include I18nAccessors::Methods.new(:title, :content, locales: [:en, :fr])
+end
+```
+
+This will define accessor methods for both `title` and `content`, in both
+English (`en`) and French (`fr`).
+
+### Method Missing
+
+`I18nAccessors::Missing` does a similar thing, but using `method_missing` to
+respond to messages of the form `<attribute>_<locale>`. This is generally
+slower (due to how `method_missing` works), but can be used to handle *any* locale:
+
+```ruby
+class Post
+
+  # ...
+
+  include I18nAccessors::Missing.new(:title, :content)
+end
+```
+
+No options are accepted to the constructor for this class.
 
 ## Development
 
