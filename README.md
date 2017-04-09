@@ -104,8 +104,8 @@ I18nAccessors.configure do |config|
 end
 ```
 
-With this configuration, `Globalize.locale` will be set from the locale
-accessor methods rather than `I18n.locale`.
+With this configuration, `Globalize.with_locale` will be used to set the locale
+around the accessor methods, rather than `I18n.with_locale`.
 
 ## Development
 
