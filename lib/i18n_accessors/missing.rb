@@ -35,7 +35,7 @@ the method call.
           attribute = $1.to_sym
           locale, suffix = $2.split('_'.freeze)
           locale = "#{locale}-#{suffix.upcase}".freeze if suffix
-          I18n.with_locale(locale) { public_send("#{attribute}#{$4}".freeze, *arguments) }
+          I18nAccessors.i18n_class.with_locale(locale) { public_send("#{attribute}#{$4}".freeze, *arguments) }
         else
           super(method_name, *arguments, &block)
         end
