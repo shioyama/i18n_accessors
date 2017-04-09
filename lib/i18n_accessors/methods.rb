@@ -34,13 +34,13 @@ If no locales are passed as an option to the initializer,
         locales.each do |locale|
           normalized_locale = I18nAccessors.normalize_locale(locale)
           define_method "#{attribute}_#{normalized_locale}" do |*args|
-            I18n.with_locale(locale) { send(attribute, *args) }
+            I18nAccessors.i18n_class.with_locale(locale) { send(attribute, *args) }
           end
           define_method "#{attribute}_#{normalized_locale}?" do |*args|
-            I18n.with_locale(locale) { send("#{attribute}?", *args) }
+            I18nAccessors.i18n_class.with_locale(locale) { send("#{attribute}?", *args) }
           end
           define_method "#{attribute}_#{normalized_locale}=" do |value, *args|
-            I18n.with_locale(locale) { send("#{attribute}=", value, *args) }
+            I18nAccessors.i18n_class.with_locale(locale) { send("#{attribute}=", value, *args) }
           end
         end
       end

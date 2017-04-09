@@ -25,4 +25,21 @@ shared_examples_for "locale accessor" do |attribute, locale|
       expect(instance.send(:"#{attribute}_#{locale}=", "value", *args)).to eq("value")
     end
   end
+
+  describe "custom i18n class" do
+    before do
+      stub_const 'MyI18n', double("i18n")
+      I18nAccessors.config.i18n_class = MyI18n
+    end
+    after do
+      I18nAccessors.config.i18n_class = I18n
+    end
+
+    it "uses custom i18n class if set" do
+      instance = model_class.new
+
+      expect(MyI18n).to receive(:with_locale).once.with(locale.to_sym).and_yield
+      instance.send(:"#{attribute}_#{locale}=", "value")
+    end
+  end
 end
