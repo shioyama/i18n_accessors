@@ -13,7 +13,7 @@ Define locale accessors for your translated attributes.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'i18n_accessors'
+gem 'i18n_accessors', '~> 0.1.1'
 ```
 
 And then execute:
