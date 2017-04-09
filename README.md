@@ -1,5 +1,11 @@
 # I18nAccessors
 
+[![Gem Version](https://badge.fury.io/rb/i18n_accessors.svg)][gem]
+[![Build Status](https://travis-ci.org/shioyama/i18n_accessors.svg?branch=master)][travis]
+
+[gem]: https://rubygems.org/gems/i18n_accessors
+[travis]: https://travis-ci.org/shioyama/i18n_accessors
+
 Define locale accessors for your translated attributes.
 
 ## Installation
